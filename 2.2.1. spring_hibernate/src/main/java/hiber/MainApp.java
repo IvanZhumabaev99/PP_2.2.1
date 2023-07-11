@@ -17,13 +17,13 @@ public class MainApp {
       UserService userService = context.getBean(UserService.class);
 
       userService.add(new User("User1", "Lastname1", "user1@mail.ru",
-              new Car("Lada", 1118)));
+              new Car("Mercedes", 1)));
       userService.add(new User("User2", "Lastname2", "user2@mail.ru",
               new Car("Lada", 2107)));
       userService.add(new User("User3", "Lastname3", "user3@mail.ru",
-              new Car("Lada", 2190)));
+              new Car("Toyota", 2)));
       userService.add(new User("User4", "Lastname4", "user4@mail.ru",
-              new Car("Lada", 2114)));
+              new Car("Ford", 3)));
 
       List<User> users = userService.listUsers();
       for (User user : users) {
@@ -35,8 +35,12 @@ public class MainApp {
          System.out.println();
       }
 
-      List<User> userModelSeries = userService.getUsersByCarModelAndSeries("Лада", 2107);
-      userModelSeries.forEach(System.out::println);
+      User user = userService.getUsersByCarModelAndSeries("Lada", 2107);
+      if (user != null) {
+         System.out.println(user);
+      } else {
+         System.out.println("Пользователь не найден");
+      }
 
       context.close();
    }
